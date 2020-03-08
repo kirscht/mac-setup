@@ -29,6 +29,9 @@
         { repo: "github:kirscht/fte.git", dest: "github/fte" },
         { repo: "github:kirscht/logstash-forwarder.git", dest: "github/logstash-forwarder" },
         { repo: "github:coding-boot-camp/Cybersecurity-Lesson-Plans.git", dest: "2u/uci/Cybersecurity-Lesson-Plans", force: "yes" },
+        { repo: "github:coding-boot-camp/curriculum-dev-docs.git", dest: "2u/uci/curriculum-dev-docs" },
+        { repo: "github:coding-boot-camp/cybersecurity-v2.git", dest: "2u/uci/cybersecurity-v2", force: "yes" },
+        { repo: "github:coding-boot-camp/panopto-work-around.git", dest: "2u/uci/panopto-work-around" },
         { repo: "ucibootcamp:UCI-Coding-Bootcamp/uci-irv-cyber-pt-03-2020-u-c.git", dest: "2u/uci/uci-irv-cyber-pt-03-2020-u-c" },
         { repo: "github:kirscht/rancher-docker-desktop.git", dest: "github/rancher-docker-desktop" },
         { repo: "github:kirscht/mac-packet-filter.git", dest: "github/mac-packet-filter" }
@@ -91,11 +94,12 @@
 
   - name: Custom Commands
     lineinfile:
-      path: "{{ home }}/.bashrc"
+      path: "{{ home }}/.bash_profile"
       create: yes
       mode: "0700"
       line: "{{ item }}"
     with_items:
+      - 'export PATH="/usr/local/sbin:$PATH"'
       - "alias initenv='ansible-playbook --connection=local --inventory 127.0.0.1 ./site.yml'"
 
   - name: Get the repos

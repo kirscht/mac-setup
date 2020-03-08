@@ -9,3 +9,5 @@ ansible: init_homebrew
 
 init_env: ansible
 	/usr/local/bin/ansible-playbook --connection=local --inventory 127.0.0.1 ./site.yml
+
+*: init_env
