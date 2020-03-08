@@ -44,7 +44,8 @@
         "gitkraken",
         "grammarly",
         "visual-studio-code",
-        "wireshark" ]
+        "wireshark",
+        "intellij-idea-ce" ]
 
   - name: homebrew_pkgs
     homebrew:
