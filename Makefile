@@ -11,11 +11,11 @@ init_homebrew:
 
 .PHONY: ansible
 ansible: init_homebrew
-	brew install ansible
+	which ansible || brew install ansible
 
 .PHONY: init_env
 init_env: ansible
-	/usr/local/bin/ansible-playbook --connection=local --inventory 127.0.0.1 ./site.yml
+	/usr/local/bin/ansible-playbook --connection=local --inventory 127.0.0.1 -K ./site.yml
 
 .PHONY: kali_vbox
 kali_vbox:

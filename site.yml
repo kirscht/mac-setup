@@ -50,8 +50,16 @@
         "visual-studio-code",
         "wireshark",
         "intellij-idea-ce" ]
-      commands: [
-        "defaults write com.apple.dock mru-spaces -bool false"
+      osx_defaults: [
+        { domain: "defaults write com.apple.dock",
+          key: "mru-spaces",
+          type: "bool",
+          value: false },
+        { domain: "/Library/Preferences/com.apple.alf",
+          key: "globalstate",
+          type: "int",
+          value: 1,
+          become: yes }
       ]
 
 # https://www.defaults-write.com/disable-automatically-rearrange-spaces-based-on-recent-use/
@@ -133,16 +141,36 @@
       - "{{ gitignore_lines }}"
 
 
-#  - name: Install Kali
-#    get_url:
-#      url: "{{ item }}"
-#      dest: "{{ home }}/iso"
-#    with_items:
-#      - "https://images.offensive-security.com/virtual-images/kali-linux-2020.1-vbox-amd64.ova"
-      #- "https://images.offensive-security.com/virtual-images/kali-linux-2020.1-vmware-amd64.7z"
-
-  - name: Turn off Desktop Autoarrange
-    shell:
-      cmd: "{{ item }}"
+  - name: Install Kali
+    get_url:
+      url: "{{ item.url }}"
+      dest: "{{ item.dest }}"
     with_items:
-      "{{ commands }}"
+      - { url: "https://images.offensive-security.com/virtual-images/kali-linux-2020.1-vbox-amd64.ova",
+          dest: "{{ home }}/iso/kali-linux-2020.1-vbox-amd64.ova" }
+      #- { url: "https://images.offensive-security.com/virtual-images/kali-linux-2020.1-vmware-amd64.7z",
+      #    dest: "{{ home }}/iso/kali-linux-2020.1-vmware-amd64.7z" }
+
+#  - name: Turn off Desktop Autoarrange
+#    shell:
+#      cmd: "{{ item }}"
+#    with_items:
+#      "{{ commands }}"
+
+
+#  - name: Run Priviledged Commands
+#    shell:
+#      cmd: "{{ item }}"
+#      become: yes
+#    with_items:
+#      "{{ sudo_commands }}"
+
+  - name: Turn On Firewall
+    osx_defaults:
+      domain: "{{ item.domain }}"
+      key: "{{ item.key }}"
+      type: "{{ item.type }}"
+      value: "{{ item.value }}"
+    become: "{{ item.become | default('no') }}"
+    with_items:
+      - "{{ osx_defaults }}"
