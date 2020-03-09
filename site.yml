@@ -44,6 +44,7 @@
         "wireshark" ]
       homebrew_cask_pkgs: [
         "virtualbox",
+        "virtualbox-extension-pack",
         "gitkraken",
         "grammarly",
         "visual-studio-code",
@@ -78,6 +79,8 @@
         - { path: "{{ home }}/Repositories/github", mode: "u=rwx,g=,o=" }
         - { path: "{{ home }}/Repositories/gitlab", mode: "u=rwx,g=,o=" }
         - { path: "{{ home }}/Repositories/2u", mode: "u=rwx,g=,o=" }
+        - { path: "{{ home }}/iso", mode: "u=rwx,g=,o=" }
+
 
   - name: Create config file
     copy:
@@ -123,3 +126,11 @@
       - "{{ repos }}"
       - "{{ gitignore_lines }}"
 
+
+#  - name: Install Kali
+#    get_url:
+#      url: "{{ item }}"
+#      dest: "{{ home }}/iso"
+#    with_items:
+#      - "https://images.offensive-security.com/virtual-images/kali-linux-2020.1-vbox-amd64.ova"
+      #- "https://images.offensive-security.com/virtual-images/kali-linux-2020.1-vmware-amd64.7z"
