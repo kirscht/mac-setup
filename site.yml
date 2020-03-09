@@ -50,6 +50,12 @@
         "visual-studio-code",
         "wireshark",
         "intellij-idea-ce" ]
+      commands: [
+        "defaults write com.apple.dock mru-spaces -bool false"
+      ]
+
+# https://www.defaults-write.com/disable-automatically-rearrange-spaces-based-on-recent-use/
+
 
   - name: homebrew_pkgs
     homebrew:
@@ -134,3 +140,9 @@
 #    with_items:
 #      - "https://images.offensive-security.com/virtual-images/kali-linux-2020.1-vbox-amd64.ova"
       #- "https://images.offensive-security.com/virtual-images/kali-linux-2020.1-vmware-amd64.7z"
+
+  - name: Turn off Desktop Autoarrange
+    shell:
+      cmd: "{{ item }}"
+    with_items:
+      "{{ commands }}"
