@@ -19,12 +19,12 @@ init_env: ansible
 
 .PHONY: kali_vbox
 kali_vbox:
-	VBoxManage import ~/iso/kali-linux-2020.1-vbox-amd64.ova --vsys 0 --vmname "Kali Linux" --eula accept
+	VBoxManage list vms | egrep "Kali Linux" || VBoxManage import ~/iso/kali-linux-2020.1-vbox-amd64.ova --vsys 0 --vmname "Kali Linux" --eula accept
 
 .PHONY: kali_start
-kali_start:
+kali_start: kali_vbox
 	VBoxManage startvm "Kali Linux" --type gui
-	
+
 
 .PHONY: kali_poweroff
 kali_poweroff:
