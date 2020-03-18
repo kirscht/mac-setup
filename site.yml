@@ -46,10 +46,10 @@
         "virtualbox",
         "virtualbox-extension-pack",
         "gitkraken",
-        "grammarly",
+        # "grammarly",
         "visual-studio-code",
-        "wireshark",
-        "intellij-idea-ce" ]
+        "wireshark" ]
+        #"intellij-idea-ce" ]
       osx_defaults: [
         { domain: "defaults write com.apple.dock",
           key: "mru-spaces",
